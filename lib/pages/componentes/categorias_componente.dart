@@ -19,7 +19,6 @@ class CategoriasComponente extends StatefulWidget {
 }
 
 class _CategoriasComponenteState extends State<CategoriasComponente> {
-  int IndexCategoriaSelecionada = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,12 +31,12 @@ class _CategoriasComponenteState extends State<CategoriasComponente> {
   }
 
   Widget _ItemCategoria(Categoria categoria) {
-    final categoriasProvider = Provider.of<ProdutoProvider>(context);
+    final produtosProvider = Provider.of<ProdutoProvider>(context);
     return GestureDetector(
       onTap: () {
         setState(() {
           parametrosApi.codigoCategoria = categoria.catcodigo;
-          categoriasProvider.refreshProdutos();
+          produtosProvider.refreshProdutos();
         });
       },
       child: Padding(
@@ -74,8 +73,8 @@ class _CategoriasComponenteState extends State<CategoriasComponente> {
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: dadosCategorias.length,
-            itemBuilder: (context, int i) {
-              return _ItemCategoria(dadosCategorias[i]);
+            itemBuilder: (context, index) {
+              return _ItemCategoria(dadosCategorias[index]);
             },
           );
         } else {

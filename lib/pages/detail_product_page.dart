@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/global/var_globais.dart';
+import 'package:gourmet_mesa/pages/componentes/observacao_produto_componente.dart';
 
 class DetailProductPage extends StatefulWidget {
   const DetailProductPage({Key key}) : super(key: key);
@@ -31,10 +32,6 @@ class _DetailProductPageState extends State<DetailProductPage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search, color: kTextColor),
-            onPressed: () {},
-          ),
-          IconButton(
             icon: Icon(Icons.shopping_cart, color: kTextColor),
             onPressed: () {},
           ),
@@ -44,22 +41,32 @@ class _DetailProductPageState extends State<DetailProductPage> {
         ],
       ),
       body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddin, vertical: kDefaultPaddin),
-              child: Center(
-                child: SelectableText(
-                  '${infoProdutoItem.proDescricao}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPaddin, vertical: kDefaultPaddin),
+            child: Center(
+              child: SelectableText(
+                '${infoProdutoItem.proDescricao}',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
-          ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPaddin, vertical: kDefaultPaddin),
+            child: Center(
+              child: SelectableText('${infoProdutoItem.proObs}',
+                  style: TextStyle(color: kTextColor, fontSize: 18)),
+            ),
+          ),
+          observaoProdutoComponente(),
+        ],
+      ),
     );
   }
 }

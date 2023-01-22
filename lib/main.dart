@@ -3,7 +3,6 @@ import 'package:gourmet_mesa/model/categorias_model.dart';
 import 'package:gourmet_mesa/pages/detail_product_page.dart';
 import 'package:gourmet_mesa/pages/home_page.dart';
 import 'package:gourmet_mesa/provider/categoria_provider.dart';
-import 'package:gourmet_mesa/provider/observacao_produto_provider.dart';
 import 'package:gourmet_mesa/provider/produto_provider.dart';
 import 'package:gourmet_mesa/utils/rotas_pages.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +23,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => CategoriaProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ObservacaoProdutoProvider(),
         ),
       ],
       child: MaterialApp(

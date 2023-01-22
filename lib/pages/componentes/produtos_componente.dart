@@ -32,6 +32,7 @@ class _ProdutosComponenteState extends State<ProdutosComponente> {
   Widget _Produto(Produto produto) {
     return GestureDetector(
       onTap: () {
+        parametrosApi.codigoProduto = produto.proCodigo;
         Navigator.of(context).pushNamed(
           AppRoutes.DETALHE_PRODUTO,
           arguments: infoProduto(
@@ -85,7 +86,7 @@ class _ProdutosComponenteState extends State<ProdutosComponente> {
       future: produtosProvider.getProdutos(),
       builder: (_, AsyncSnapshot<List<Produto>> snapshot) {
         if (snapshot.hasData) {
-          final quantidadeProdutos = snapshot.data;
+          final dadosProdutos = snapshot.data;
           return GridView.builder(
             physics: BouncingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -94,9 +95,9 @@ class _ProdutosComponenteState extends State<ProdutosComponente> {
               crossAxisSpacing: kDefaultPaddin,
               childAspectRatio: 0.75,
             ),
-            itemCount: quantidadeProdutos.length,
+            itemCount: dadosProdutos.length,
             itemBuilder: (context, index) {
-              return _Produto(quantidadeProdutos[index]);
+              return _Produto(dadosProdutos[index]);
             },
           );
         } else {

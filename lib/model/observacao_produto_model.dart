@@ -2,7 +2,7 @@ class ObservacaoProduto {
   int pobCodigo;
   int proCodigo;
   String pobDescricao;
-  bool check;
+  bool check = false;
 
   ObservacaoProduto({this.pobCodigo, this.proCodigo, this.pobDescricao});
 
