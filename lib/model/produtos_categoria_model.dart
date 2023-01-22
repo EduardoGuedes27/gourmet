@@ -5,6 +5,7 @@ class Produto {
   double tpiPraticado;
   int ucvCodigo;
   int proQtdObsObrigatorias;
+  String proObs;
   String caminhoImgUrl;
 
   Produto(
@@ -14,6 +15,7 @@ class Produto {
       this.tpiPraticado,
       this.ucvCodigo,
       this.proQtdObsObrigatorias,
+      this.proObs,
       this.caminhoImgUrl});
 
   Produto.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Produto {
     tpiPraticado = json['tpiPraticado'];
     ucvCodigo = json['ucvCodigo'];
     proQtdObsObrigatorias = json['proQtdObsObrigatorias'];
+    proObs = json['proObs'];
     caminhoImgUrl = json['caminhoImgUrl'];
   }
 
@@ -34,6 +37,7 @@ class Produto {
     data['tpiPraticado'] = this.tpiPraticado;
     data['ucvCodigo'] = this.ucvCodigo;
     data['proQtdObsObrigatorias'] = this.proQtdObsObrigatorias;
+    data['proObs'] = this.proObs;
     data['caminhoImgUrl'] = this.caminhoImgUrl;
     return data;
   }
