@@ -20,3 +20,24 @@ class inputAbrirMesa {
   static String local_mesa = '';
   static String data_abertura = '2022-12-30 10:10:10';
 }
+
+class infoProduto {
+  final int catCodigo;
+  final int proCodigo;
+  final String proDescricao;
+  final double tpiPraticado;
+  final int ucvCodigo;
+  final int proQtdObsObrigatorias;
+  final String proObs;
+  final String caminhoImgUrl;
+  infoProduto(
+    this.catCodigo,
+    this.proCodigo,
+    this.proDescricao,
+    this.tpiPraticado,
+    this.ucvCodigo,
+    this.proQtdObsObrigatorias,
+    this.proObs,
+    this.caminhoImgUrl,
+  );
+}

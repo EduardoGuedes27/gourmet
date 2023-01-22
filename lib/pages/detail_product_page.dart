@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -14,13 +16,18 @@ class DetailProductPage extends StatefulWidget {
 class _DetailProductPageState extends State<DetailProductPage> {
   @override
   Widget build(BuildContext context) {
+    final infoProdutoItem =
+        ModalRoute.of(context).settings.arguments as infoProduto;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.menu, color: kTextColor),
-          onPressed: () {},
+          icon: Icon(Icons.arrow_back_rounded, color: kTextColor),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: <Widget>[
           IconButton(
@@ -40,13 +47,16 @@ class _DetailProductPageState extends State<DetailProductPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-              child: SelectableText(
-                'Cardapio',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .copyWith(fontWeight: FontWeight.bold),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: kDefaultPaddin, vertical: kDefaultPaddin),
+              child: Center(
+                child: SelectableText(
+                  '${infoProdutoItem.proDescricao}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ]),

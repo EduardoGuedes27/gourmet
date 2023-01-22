@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/global/var_globais.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
 import 'package:gourmet_mesa/provider/produto_provider.dart';
+import 'package:gourmet_mesa/utils/rotas_pages.dart';
 import 'package:provider/provider.dart';
 
 class ProdutosComponente extends StatefulWidget {
@@ -30,7 +31,21 @@ class _ProdutosComponenteState extends State<ProdutosComponente> {
 
   Widget _Produto(Produto produto) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          AppRoutes.DETALHE_PRODUTO,
+          arguments: infoProduto(
+            produto.catCodigo,
+            produto.proCodigo,
+            produto.proDescricao,
+            produto.tpiPraticado,
+            produto.ucvCodigo,
+            produto.proQtdObsObrigatorias,
+            produto.proObs,
+            produto.caminhoImgUrl,
+          ),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
