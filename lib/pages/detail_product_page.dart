@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -65,6 +65,84 @@ class _DetailProductPageState extends State<DetailProductPage> {
             ),
           ),
           observaoProdutoComponente(),
+          QuantidaItemCarrinho(),
+        ],
+      ),
+    );
+  }
+}
+
+class QuantidaItemCarrinho extends StatefulWidget {
+  const QuantidaItemCarrinho({Key key}) : super(key: key);
+
+  @override
+  State<QuantidaItemCarrinho> createState() => _QuantidaItemCarrinhoState();
+}
+
+class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
+  int numeroItem = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    final infoProdutoItem =
+        ModalRoute.of(context).settings.arguments as infoProduto;
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: 40,
+              height: 42,
+              child: OutlinedButton(
+                child: Icon(Icons.remove, color: Colors.black),
+                onPressed: () {
+                  setState(() {
+                    if (numeroItem == 0) {
+                      print('Quantidade não pode ser menor que Zero');
+                    } else {
+                      numeroItem--;
+                    }
+                  });
+                },
+              ),
+            ),
+          ),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 4)),
+          Text(
+            '${numeroItem.toString().padLeft(2, '0')}',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: 40,
+              height: 42,
+              child: OutlinedButton(
+                child: Icon(Icons.add, color: Colors.black),
+                onPressed: () {
+                  setState(() {
+                    numeroItem++;
+                  });
+                },
+              ),
+            ),
+          ),
+          Text(
+            'R\$${infoProdutoItem.tpiPraticado * numeroItem}',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 42,
+              child: ElevatedButton(
+                child: Text('ADICIONAR'),
+                onPressed: () {},
+              ),
+            ),
+          )
         ],
       ),
     );

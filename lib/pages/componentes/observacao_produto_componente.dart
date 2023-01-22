@@ -52,9 +52,10 @@ class _observaoProdutoComponenteState extends State<observaoProdutoComponente> {
             title: Text(obsersavaoProduto[index].pobDescricao),
             key: Key(obsersavaoProduto[index].pobCodigo.toString()),
             value: obsersavaoProduto[index].check,
-            onChanged: (value) {
+            onChanged: (bool check) {
               setState(() {
-                obsersavaoProduto[index].check = true;
+                obsersavaoProduto[index].check =
+                    !obsersavaoProduto[index].check;
               });
             },
           );

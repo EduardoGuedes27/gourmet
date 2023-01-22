@@ -54,7 +54,7 @@ class _ProdutosComponenteState extends State<ProdutosComponente> {
             child: Container(
               padding: EdgeInsets.all(kDefaultPaddin),
               decoration: BoxDecoration(
-                color: Colors.blue[200],
+                color: Colors.blue[400],
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Image.network(produto.caminhoImgUrl),
