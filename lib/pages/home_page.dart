@@ -88,8 +88,6 @@ class _homePageState extends State<homePage> {
     );
   }
 
-  _homePageState();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,9 +96,7 @@ class _homePageState extends State<homePage> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.menu, color: kTextColor),
-          onPressed: () {
-            _informarDadosMesa(context);
-          },
+          onPressed: () {},
         ),
         actions: <Widget>[
           IconButton(

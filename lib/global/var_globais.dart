@@ -11,6 +11,7 @@ class dadosApi {
 
 class parametrosApi {
   static int codigoCategoria = 1;
+  static int codigoProduto = 1;
 }
 
 class inputAbrirMesa {
