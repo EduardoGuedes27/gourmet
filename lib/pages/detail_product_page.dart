@@ -129,10 +129,17 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
               ),
             ),
           ),
-          Text(
-            'R\$${infoProdutoItem.tpiPraticado * numeroItem}',
-            style: Theme.of(context).textTheme.headline6,
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'R\$${(infoProdutoItem.tpiPraticado * numeroItem).toStringAsFixed(2)}',
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2)),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
