@@ -24,7 +24,7 @@ class _observaoProdutoComponenteState extends State<observaoProdutoComponente> {
   var obsersavaoProduto = <ObservacaoProduto>[];
 
   _getObservacaoProduto() {
-    API.getObservacaoProduto().then(
+    ObservacaoProdutoApi.getObservacaoProduto().then(
       (respose) {
         setState(
           () {
