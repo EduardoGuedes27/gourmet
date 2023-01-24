@@ -19,8 +19,14 @@ class _CardCarrinhoComponenteState extends State<CardCarrinhoComponente> {
   Widget build(BuildContext context) {
     final carrinhoProvider = Provider.of<Carrinho>(context);
 
+    final items = carrinhoProvider.items.values;
+
     return Card(
-      margin: const EdgeInsets.all(25),
+      elevation: 5,
+      margin: const EdgeInsets.symmetric(
+        vertical: 25,
+        horizontal: 15,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(
@@ -38,8 +44,7 @@ class _CardCarrinhoComponenteState extends State<CardCarrinhoComponente> {
             Chip(
               backgroundColor: Theme.of(context).primaryColor,
               label: Text(
-                //'R\$ ${carrinhoProvider.totalCarrinho}',
-                'R\$ VERIFICAR',
+                'R\$ ${carrinhoProvider.totalCarrinho.toStringAsFixed(2)}',
                 style: TextStyle(
                     color: Theme.of(context).primaryTextTheme.headline6.color),
               ),
@@ -56,6 +61,90 @@ class _CardCarrinhoComponenteState extends State<CardCarrinhoComponente> {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class produtosCarrinhoComponente extends StatefulWidget {
+  const produtosCarrinhoComponente({Key key}) : super(key: key);
+
+  @override
+  State<produtosCarrinhoComponente> createState() =>
+      _produtosCarrinhoComponenteState();
+}
+
+class _produtosCarrinhoComponenteState
+    extends State<produtosCarrinhoComponente> {
+  @override
+  Widget build(BuildContext context) {
+    final carrinhoProvider = Provider.of<Carrinho>(context);
+    final items = carrinhoProvider.items.values.toList();
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return Dismissible(
+            onDismissed: (_) {
+              carrinhoProvider.removerItem(items[index].codigoProduto);
+            },
+            key: ValueKey(items[index].id),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Theme.of(context).errorColor,
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+                size: 40,
+              ),
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 20),
+              margin: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 3,
+              ),
+            ),
+            child: Card(
+              elevation: 5,
+              margin: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 4,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: CircleAvatar(
+                        child: Padding(
+                          padding: EdgeInsets.all(5),
+                          child: FittedBox(
+                            child: Text(
+                                '${items[index].precoProduto.toStringAsFixed(2)}'),
+                          ),
+                        ),
+                      ),
+                      title: Text(items[index].nomeProduto),
+                      subtitle: Text(
+                        'Total: R\$ ${(items[index].precoProduto * items[index].quantidadeProduto).toStringAsFixed(2)}',
+                      ),
+                      trailing: Text('${items[index].quantidadeProduto}X'),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

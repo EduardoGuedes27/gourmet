@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, missing_return, prefer_const_constructors
 
 import 'dart:convert';
+import 'dart:js_util';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -96,18 +97,28 @@ class _homePageState extends State<homePage> {
     final carrrinhoProvider = Provider.of<Carrinho>(context);
 
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            AppBar(
+              title: Text('Seja Bem Vindo'),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text(
+                'Carrinho',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {},
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: kTextColor),
-          onPressed: () {},
-        ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search, color: kTextColor),
-            onPressed: () {},
-          ),
           BadgeComponente(
             value: carrrinhoProvider.quantidadeItem.toString(),
             child: IconButton(

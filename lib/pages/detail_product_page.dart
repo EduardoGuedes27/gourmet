@@ -91,13 +91,14 @@ class QuantidaItemCarrinho extends StatefulWidget {
   State<QuantidaItemCarrinho> createState() => _QuantidaItemCarrinhoState();
 }
 
-class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
-  int numeroItem = 1;
+int numeroItem = 1;
 
+class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
   @override
   Widget build(BuildContext context) {
     final infoProdutoItem =
         ModalRoute.of(context).settings.arguments as infoProduto;
+
     final carrinhoProvider = Provider.of<Carrinho>(context);
 
     return Card(
@@ -150,8 +151,12 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
               child: ElevatedButton(
                 child: Text('ADICIONAR'),
                 onPressed: () {
-                  carrinhoProvider
-                      .addItem(Produto(proCodigo: infoProdutoItem.proCodigo));
+                  carrinhoProvider.addItem(Produto(
+                      catCodigo: infoProdutoItem.catCodigo,
+                      proCodigo: infoProdutoItem.proCodigo,
+                      proDescricao: infoProdutoItem.proDescricao,
+                      tpiPraticado: infoProdutoItem.tpiPraticado,
+                      ucvCodigo: infoProdutoItem.ucvCodigo));
                 },
               ),
             )

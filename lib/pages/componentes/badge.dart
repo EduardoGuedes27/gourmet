@@ -8,6 +8,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/global/var_globais.dart';
+import 'package:gourmet_mesa/model/carrinho.dart';
+import 'package:provider/provider.dart';
 
 class BadgeComponente extends StatelessWidget {
   final Widget child;
@@ -22,6 +24,8 @@ class BadgeComponente extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final carrinhoProvider = Provider.of<Carrinho>(context);
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -33,7 +37,9 @@ class BadgeComponente extends StatelessWidget {
               padding: EdgeInsets.all(2),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: color ?? Colors.red[300],
+                color: carrinhoProvider.quantidadeItem != 0
+                    ? Colors.red[300]
+                    : Colors.transparent,
               ),
               constraints: BoxConstraints(
                 minHeight: 16,
@@ -44,7 +50,9 @@ class BadgeComponente extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.black,
+                  color: carrinhoProvider.quantidadeItem != 0
+                      ? Colors.black
+                      : Colors.transparent,
                 ),
               )),
         )

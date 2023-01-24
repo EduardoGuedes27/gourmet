@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:gourmet_mesa/model/carrinho_item.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
+import 'package:gourmet_mesa/pages/detail_product_page.dart';
 
 class Carrinho with ChangeNotifier {
   Map<String, CarrinhoItem> _items = {};
@@ -27,14 +28,14 @@ class Carrinho with ChangeNotifier {
   }
 
   void addItem(Produto produto) {
-    if (_items.containsKey(produto.proCodigo)) {
+    if (_items.containsKey(produto.proCodigo.toString())) {
       _items.update(
         produto.proCodigo.toString(),
         (produtoExistemte) => CarrinhoItem(
           id: produtoExistemte.id,
           codigoProduto: produtoExistemte.codigoProduto,
           nomeProduto: produtoExistemte.nomeProduto,
-          quantidadeProduto: produtoExistemte.quantidadeProduto + 1,
+          quantidadeProduto: produtoExistemte.quantidadeProduto + numeroItem,
           precoProduto: produtoExistemte.precoProduto,
         ),
       );
@@ -45,7 +46,7 @@ class Carrinho with ChangeNotifier {
           id: Random().nextInt(100).toString(),
           codigoProduto: produto.proCodigo.toString(),
           nomeProduto: produto.proDescricao,
-          quantidadeProduto: 1,
+          quantidadeProduto: numeroItem,
           precoProduto: produto.tpiPraticado,
         ),
       );

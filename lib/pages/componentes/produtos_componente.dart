@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/global/var_globais.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
+import 'package:gourmet_mesa/provider/categoria_provider.dart';
 import 'package:gourmet_mesa/provider/produto_provider.dart';
 import 'package:gourmet_mesa/utils/rotas_pages.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +22,19 @@ class ProdutosComponente extends StatefulWidget {
 class _ProdutosComponenteState extends State<ProdutosComponente> {
   @override
   Widget build(BuildContext context) {
+    final categoriaProvider = Provider.of<CategoriaProvider>(context);
     final infoProdutoItem =
         ModalRoute.of(context).settings.arguments as infoProduto;
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-        child: _listaProdutos(),
-      ),
-    );
+    if (categoriaProvider.categorias != null) {
+      return Expanded(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+          child: _listaProdutos(),
+        ),
+      );
+    } else {
+      return Center(child: Text('NÃO FOI POSSIVEL CARREGAR AS CATEGORIAS'));
+    }
   }
 
   Widget _Produto(Produto produto) {
