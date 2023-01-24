@@ -7,10 +7,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/global/var_globais.dart';
+import 'package:gourmet_mesa/model/carrinho.dart';
 import 'package:gourmet_mesa/model/categorias_model.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
+import 'package:gourmet_mesa/pages/componentes/badge.dart';
 import 'package:gourmet_mesa/pages/componentes/categorias_componente.dart';
 import 'package:gourmet_mesa/pages/componentes/produtos_componente.dart';
+import 'package:gourmet_mesa/utils/rotas_pages.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -90,6 +93,8 @@ class _homePageState extends State<homePage> {
 
   @override
   Widget build(BuildContext context) {
+    final carrrinhoProvider = Provider.of<Carrinho>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -103,9 +108,14 @@ class _homePageState extends State<homePage> {
             icon: Icon(Icons.search, color: kTextColor),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Icon(Icons.shopping_cart, color: kTextColor),
-            onPressed: () {},
+          BadgeComponente(
+            value: carrrinhoProvider.quantidadeItem.toString(),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart, color: kTextColor),
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART_PAGE);
+              },
+            ),
           ),
           SizedBox(
             width: kDefaultPaddin / 2,

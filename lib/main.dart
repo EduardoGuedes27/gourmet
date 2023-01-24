@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gourmet_mesa/model/carrinho.dart';
 import 'package:gourmet_mesa/model/categorias_model.dart';
+import 'package:gourmet_mesa/pages/cart_page.dart';
 import 'package:gourmet_mesa/pages/detail_product_page.dart';
 import 'package:gourmet_mesa/pages/home_page.dart';
 import 'package:gourmet_mesa/provider/categoria_provider.dart';
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => CategoriaProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => Carrinho(),
+        ),
       ],
       child: MaterialApp(
         title: 'Gourmet Mesa',
@@ -33,6 +38,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoutes.HOME_PAGE: (ctx) => const homePage(),
           AppRoutes.DETALHE_PRODUTO: (ctx) => const DetailProductPage(),
+          AppRoutes.CART_PAGE: (ctx) => const CartPage(),
         },
       ),
     );

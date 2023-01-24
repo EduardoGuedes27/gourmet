@@ -21,6 +21,8 @@ class ProdutosComponente extends StatefulWidget {
 class _ProdutosComponenteState extends State<ProdutosComponente> {
   @override
   Widget build(BuildContext context) {
+    final infoProdutoItem =
+        ModalRoute.of(context).settings.arguments as infoProduto;
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin),
@@ -70,7 +72,7 @@ class _ProdutosComponenteState extends State<ProdutosComponente> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
             child: Text(
-              'R\$ ${produto.tpiPraticado.toStringAsFixed(2)}',
+              'R\$ ${(produto.tpiPraticado).toStringAsFixed(2)}',
               style: TextStyle(color: kTextColor, fontWeight: FontWeight.bold),
             ),
           ),

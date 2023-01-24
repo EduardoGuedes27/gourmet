@@ -5,7 +5,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/global/var_globais.dart';
+import 'package:gourmet_mesa/model/carrinho.dart';
+import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
+import 'package:gourmet_mesa/pages/componentes/badge.dart';
 import 'package:gourmet_mesa/pages/componentes/observacao_produto_componente.dart';
+import 'package:gourmet_mesa/provider/produto_provider.dart';
+import 'package:gourmet_mesa/utils/rotas_pages.dart';
+import 'package:provider/provider.dart';
 
 class DetailProductPage extends StatefulWidget {
   const DetailProductPage({Key key}) : super(key: key);
@@ -19,6 +25,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
   Widget build(BuildContext context) {
     final infoProdutoItem =
         ModalRoute.of(context).settings.arguments as infoProduto;
+    final carrrinhoProvider = Provider.of<Carrinho>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,9 +38,14 @@ class _DetailProductPageState extends State<DetailProductPage> {
           },
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart, color: kTextColor),
-            onPressed: () {},
+          BadgeComponente(
+            value: carrrinhoProvider.quantidadeItem.toString(),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart, color: kTextColor),
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART_PAGE);
+              },
+            ),
           ),
           SizedBox(
             width: kDefaultPaddin / 2,
@@ -86,71 +98,65 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
   Widget build(BuildContext context) {
     final infoProdutoItem =
         ModalRoute.of(context).settings.arguments as infoProduto;
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: 40,
-              height: 42,
-              child: OutlinedButton(
-                child: Icon(Icons.remove, color: Colors.black),
-                onPressed: () {
-                  setState(() {
-                    if (numeroItem == 0) {
-                      print('Quantidade não pode ser menor que Zero');
-                    } else {
-                      numeroItem--;
-                    }
-                  });
-                },
-              ),
+    final carrinhoProvider = Provider.of<Carrinho>(context);
+
+    return Card(
+      margin: const EdgeInsets.all(5),
+      child: Padding(
+        padding: const EdgeInsets.all(0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      if (numeroItem <= 0) {
+                        print('VALOR JA ESTA ZERADO');
+                      } else {
+                        numeroItem--;
+                      }
+                    });
+                  },
+                  child: Text(
+                    '-',
+                    style: TextStyle(fontSize: 40, color: kTextColor),
+                  ),
+                ),
+                Text(
+                  '${numeroItem.toString().padLeft(2, '0')}',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      numeroItem++;
+                    });
+                  },
+                  child: Text(
+                    '+',
+                    style: TextStyle(fontSize: 35, color: kTextColor),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 4)),
-          Text(
-            '${numeroItem.toString().padLeft(2, '0')}',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: 40,
-              height: 42,
-              child: OutlinedButton(
-                child: Icon(Icons.add, color: Colors.black),
-                onPressed: () {
-                  setState(() {
-                    numeroItem++;
-                  });
-                },
-              ),
-            ),
-          ),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2)),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
+            Text(
               'R\$${(infoProdutoItem.tpiPraticado * numeroItem).toStringAsFixed(2)}',
               style: Theme.of(context).textTheme.headline6,
             ),
-          ),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin / 2)),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
+            SizedBox(
               height: 42,
               child: ElevatedButton(
                 child: Text('ADICIONAR'),
-                onPressed: () {},
+                onPressed: () {
+                  carrinhoProvider
+                      .addItem(Produto(proCodigo: infoProdutoItem.proCodigo));
+                },
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
