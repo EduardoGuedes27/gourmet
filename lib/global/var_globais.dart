@@ -5,8 +5,14 @@ const kTextLightColor = Color(0xFFACACAC);
 
 const kDefaultPaddin = 20.0;
 
+/*
 class dadosApi {
   static String apiUrl = 'http://cellecia.inforvix.net.br:9000/';
+}*/
+
+class dadosApi {
+  static String apiUrl = 'http://cellecia.inforvix.net.br:9000/';
+  //static String apiUrl = 'https://c6d4-2804-1b3-9101-f4a6-ccbf-300d-b06c-25cb.sa.ngrok.io/';
 }
 
 class parametrosApi {
