@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -9,8 +11,11 @@ import 'package:gourmet_mesa/model/carrinho.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
 import 'package:gourmet_mesa/pages/componentes/badge.dart';
 import 'package:gourmet_mesa/pages/componentes/observacao_produto_componente.dart';
+import 'package:gourmet_mesa/pages/home_page.dart';
 import 'package:gourmet_mesa/provider/produto_provider.dart';
 import 'package:gourmet_mesa/utils/rotas_pages.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class DetailProductPage extends StatefulWidget {
@@ -92,6 +97,7 @@ class QuantidaItemCarrinho extends StatefulWidget {
 }
 
 int numeroItem = 1;
+var comanda_item_codigo;
 
 class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
   @override
@@ -151,12 +157,40 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
               child: ElevatedButton(
                 child: Text('ADICIONAR'),
                 onPressed: () {
-                  carrinhoProvider.addItem(Produto(
+                  carrinhoProvider.addItem(
+                    Produto(
                       catCodigo: infoProdutoItem.catCodigo,
                       proCodigo: infoProdutoItem.proCodigo,
                       proDescricao: infoProdutoItem.proDescricao,
                       tpiPraticado: infoProdutoItem.tpiPraticado,
-                      ucvCodigo: infoProdutoItem.ucvCodigo));
+                      ucvCodigo: infoProdutoItem.ucvCodigo,
+                    ),
+                  );
+
+                  DataHoraAtual();
+
+                  void _addItemCarrinho() async {
+                    var baseUrl = Uri.parse('${dadosApi.apiUrl}/inserir-item');
+                    var dados = {
+                      "COMANDA_CODIGO": codigoComanda,
+                      "PRO_CODIGO": infoProdutoItem.proCodigo,
+                      "COMANDA_ITEM_QTD": numeroItem,
+                      "COMANDA_ITEM_VALOR_UNT": infoProdutoItem.tpiPraticado,
+                      "UCV_CODIGO": infoProdutoItem.ucvCodigo,
+                      "COMANDA_ITEM_DATA_INSERCAO": _dataHoraAtual,
+                    };
+
+                    var bodyJson = json.encode(dados);
+
+                    Response response = await http.post(
+                      baseUrl,
+                      body: bodyJson,
+                      headers: {"Content-type": "application/json"},
+                    );
+                    var retornoDados = jsonDecode(response.body);
+                  }
+
+                  _addItemCarrinho();
                 },
               ),
             )
@@ -165,4 +199,16 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
       ),
     );
   }
+}
+
+var _dataHoraAtual = '';
+//ESTA FUNÇÃO PEGA A DATA ATUAL NO FORMATO 'YYYY/MM/DD HH:MM:SS'
+void DataHoraAtual() {
+  var dia = DateTime.now().day.toString().padLeft(2, '0');
+  var mes = DateTime.now().month.toString().padLeft(2, '0');
+  var ano = DateTime.now().year.toString().padLeft(4, '0');
+  var hora = DateTime.now().hour.toString().padLeft(2, '0');
+  var minuto = DateTime.now().minute.toString().padLeft(2, '0');
+  var segundo = DateTime.now().second.toString().padLeft(2, '0');
+  _dataHoraAtual = '${ano}/${mes}/${dia} ${hora}:${minuto}:${segundo}';
 }

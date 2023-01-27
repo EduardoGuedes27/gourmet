@@ -1,11 +1,19 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:gourmet_mesa/global/var_globais.dart';
 import 'package:gourmet_mesa/model/carrinho.dart';
+import 'package:gourmet_mesa/model/carrinho_item.dart';
+import 'package:gourmet_mesa/pages/detail_product_page.dart';
+import 'package:gourmet_mesa/pages/home_page.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class CardCarrinhoComponente extends StatefulWidget {
   const CardCarrinhoComponente({Key key}) : super(key: key);
@@ -51,7 +59,10 @@ class _CardCarrinhoComponenteState extends State<CardCarrinhoComponente> {
             ),
             Spacer(),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                _ConfirmarCompraItem();
+                carrinhoProvider.limparCarrinho();
+              },
               child: Text('Comprar'),
               style: TextButton.styleFrom(
                 textStyle: TextStyle(
@@ -87,7 +98,23 @@ class _produtosCarrinhoComponenteState
         itemBuilder: (context, index) {
           return Dismissible(
             onDismissed: (_) {
-              carrinhoProvider.removerItem(items[index].codigoProduto);
+              void _DeletarItemCarrinho() async {
+                var url = Uri.parse(
+                    "${dadosApi.apiUrl}remover-item/${codigoComanda}/${items[index].codigoProduto}");
+                var response = await http.delete(url);
+                if (response.statusCode == 200) {
+                  print('object');
+                  carrinhoProvider.removerItem(items[index].codigoProduto);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Text('Item Removido com Sucesso'),
+                    ),
+                  );
+                }
+              }
+
+              _DeletarItemCarrinho();
             },
             key: ValueKey(items[index].id),
             direction: DismissDirection.endToStart,
@@ -148,4 +175,21 @@ class _produtosCarrinhoComponenteState
       ),
     );
   }
+}
+
+void _ConfirmarCompraItem() async {
+  var baseUrl = Uri.parse('${dadosApi.apiUrl}/confirma-compra-item');
+  var dados = {
+    "COMANDA_CODIGO": codigoComanda,
+  };
+
+  var bodyJson = json.encode(dados);
+
+  Response response = await http.patch(
+    baseUrl,
+    body: bodyJson,
+    headers: {"Content-type": "application/json"},
+  );
+  var retornoDados = json.decode(response.body);
+  print(retornoDados);
 }

@@ -6,7 +6,7 @@ const kTextLightColor = Color(0xFFACACAC);
 const kDefaultPaddin = 20.0;
 
 class dadosApi {
-  static String apiUrl = 'http://localhost:9000/';
+  static String apiUrl = 'http://192.168.15.4/9000';
 }
 
 class parametrosApi {
@@ -18,7 +18,7 @@ class inputAbrirMesa {
   static String numero_comanda = '';
   static String nome_cliente = '';
   static String local_mesa = '';
-  static String data_abertura = '2022-12-30 10:10:10';
+  static String data_abertura = '';
 }
 
 class infoProduto {

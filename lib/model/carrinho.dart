@@ -59,7 +59,7 @@ class Carrinho with ChangeNotifier {
     notifyListeners();
   }
 
-  void limparCarrinho(String productId) {
+  void limparCarrinho() {
     _items = {};
     notifyListeners();
   }

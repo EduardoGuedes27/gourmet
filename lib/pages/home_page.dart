@@ -76,12 +76,17 @@ class _homePageState extends State<homePage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
+                DataHoraAtual();
+
                 inputAbrirMesa.numero_comanda =
                     _numeroController.text.toString();
                 inputAbrirMesa.nome_cliente = _nomeController.text.toString();
                 inputAbrirMesa.local_mesa = _localController.text.toString();
+                inputAbrirMesa.data_abertura = dataHoraAtual.toString();
+
                 if (_formKey.currentState.validate()) {
                   _abrirMesa();
+                  Navigator.pop(context);
                 }
               },
               child: Text('Ok'),
@@ -118,6 +123,17 @@ class _homePageState extends State<homePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: Icon(
+              Icons.menu,
+              color: kTextColor,
+            ),
+          ),
+        ),
         actions: <Widget>[
           BadgeComponente(
             value: carrrinhoProvider.quantidadeItem.toString(),
@@ -127,6 +143,12 @@ class _homePageState extends State<homePage> {
                 Navigator.of(context).pushNamed(AppRoutes.CART_PAGE);
               },
             ),
+          ),
+          IconButton(
+            icon: Icon(Icons.open_in_browser, color: kTextColor),
+            onPressed: () {
+              _informarDadosMesa(context);
+            },
           ),
           SizedBox(
             width: kDefaultPaddin / 2,
@@ -170,6 +192,24 @@ void _abrirMesa() async {
     body: bodyJson,
     headers: {"Content-type": "application/json"},
   );
-  var retornoDados = jsonDecode(response.body);
-  print(retornoDados);
+  var retornoDados = json.decode(response.body);
+  int retorno_codigo = retornoDados["CON_CODIGO"];
+
+  codigoComanda = retorno_codigo;
+
+  print(retorno_codigo);
+}
+
+var codigoComanda;
+
+var dataHoraAtual = '';
+
+void DataHoraAtual() {
+  var dia = DateTime.now().day.toString().padLeft(2, '0');
+  var mes = DateTime.now().month.toString().padLeft(2, '0');
+  var ano = DateTime.now().year.toString().padLeft(4, '0');
+  var hora = DateTime.now().hour.toString().padLeft(2, '0');
+  var minuto = DateTime.now().minute.toString().padLeft(2, '0');
+  var segundo = DateTime.now().second.toString().padLeft(2, '0');
+  dataHoraAtual = '${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}';
 }
