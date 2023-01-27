@@ -8,8 +8,9 @@ import 'package:http/http.dart' as http;
 
 class ProdutosApi {
   Future<List<Produto>> getProdrutos() async {
-    final response = await http.get(
+    var conversao_url = Uri.parse(
         '${dadosApi.apiUrl}produto-categoria/${parametrosApi.codigoCategoria}');
+    final response = await http.get(conversao_url);
 
     if (response.statusCode == 200) {
       final decode = await json.decode(response.body);

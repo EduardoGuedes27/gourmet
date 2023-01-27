@@ -5,7 +5,9 @@ import 'package:http/http.dart' as http;
 
 class CategoriaApi {
   Future<List<Categoria>> getCategorias() async {
-    final response = await http.get('${dadosApi.apiUrl}categorias');
+    var conversao_url = Uri.parse("${dadosApi.apiUrl}categorias");
+
+    final response = await http.get(conversao_url);
 
     if (response.statusCode == 200) {
       final decode = json.decode(response.body);
