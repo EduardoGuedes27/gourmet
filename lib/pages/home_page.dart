@@ -177,6 +177,7 @@ class _homePageState extends State<homePage> {
 }
 
 void _abrirMesa() async {
+  DataHoraAtual();
   var baseUrl = Uri.parse('${dadosApi.apiUrl}/abrir-comanda');
   var dados = {
     "NUMERO_COMANDA": inputAbrirMesa.numero_comanda,
@@ -201,15 +202,3 @@ void _abrirMesa() async {
 }
 
 var codigoComanda;
-
-var dataHoraAtual = '';
-
-void DataHoraAtual() {
-  var dia = DateTime.now().day.toString().padLeft(2, '0');
-  var mes = DateTime.now().month.toString().padLeft(2, '0');
-  var ano = DateTime.now().year.toString().padLeft(4, '0');
-  var hora = DateTime.now().hour.toString().padLeft(2, '0');
-  var minuto = DateTime.now().minute.toString().padLeft(2, '0');
-  var segundo = DateTime.now().second.toString().padLeft(2, '0');
-  dataHoraAtual = '${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}';
-}

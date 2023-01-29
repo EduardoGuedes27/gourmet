@@ -8,6 +8,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/apis/observacao_produto_api.dart';
+import 'package:gourmet_mesa/model/carrinho.dart';
 import 'package:gourmet_mesa/model/observacao_produto_model.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,8 @@ class observaoProdutoComponente extends StatefulWidget {
   State<observaoProdutoComponente> createState() =>
       _observaoProdutoComponenteState();
 }
+
+var observacaoSeleciondas = [];
 
 class _observaoProdutoComponenteState extends State<observaoProdutoComponente> {
   var obsersavaoProduto = <ObservacaoProduto>[];
@@ -44,19 +47,36 @@ class _observaoProdutoComponenteState extends State<observaoProdutoComponente> {
 
   @override
   Widget build(BuildContext context) {
+    final carrinhoProvider = Provider.of<Carrinho>(context);
+
     return Expanded(
       child: ListView.builder(
         itemCount: obsersavaoProduto.length,
         itemBuilder: (context, index) {
+          void addObservacao() {
+            observacaoSeleciondas.add(obsersavaoProduto[index].pobDescricao);
+          }
+
+          void removerObservacao(int index) {
+            observacaoSeleciondas.removeAt(index);
+          }
+
           return CheckboxListTile(
             title: Text(obsersavaoProduto[index].pobDescricao),
             key: Key(obsersavaoProduto[index].pobCodigo.toString()),
             value: obsersavaoProduto[index].check,
             onChanged: (bool check) {
-              setState(() {
-                obsersavaoProduto[index].check =
-                    !obsersavaoProduto[index].check;
-              });
+              setState(
+                () {
+                  obsersavaoProduto[index].check =
+                      !obsersavaoProduto[index].check;
+                  if (check == true) {
+                    addObservacao();
+                  } else {
+                    removerObservacao(index);
+                  }
+                },
+              );
             },
           );
         },

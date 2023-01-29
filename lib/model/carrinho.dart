@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:gourmet_mesa/model/carrinho_item.dart';
+import 'package:gourmet_mesa/model/observacao_produto_model.dart';
 import 'package:gourmet_mesa/model/produtos_categoria_model.dart';
 import 'package:gourmet_mesa/pages/detail_product_page.dart';
 

@@ -11,7 +11,8 @@ class dadosApi {
 }*/
 
 class dadosApi {
-  static String apiUrl = 'http://cellecia.inforvix.net.br:9000/';
+  static String apiUrl = 'http://localhost:9000/';
+  //static String apiUrl = 'http://cellecia.inforvix.net.br:9000/';
   //static String apiUrl = 'https://c6d4-2804-1b3-9101-f4a6-ccbf-300d-b06c-25cb.sa.ngrok.io/';
 }
 
@@ -46,4 +47,16 @@ class infoProduto {
     this.proObs,
     this.caminhoImgUrl,
   );
+}
+
+var dataHoraAtual = '';
+//ESTA FUNÇÃO PEGA A DATA ATUAL NO FORMATO 'YYYY/MM/DD HH:MM:SS'
+void DataHoraAtual() {
+  var dia = DateTime.now().day.toString().padLeft(2, '0');
+  var mes = DateTime.now().month.toString().padLeft(2, '0');
+  var ano = DateTime.now().year.toString().padLeft(4, '0');
+  var hora = DateTime.now().hour.toString().padLeft(2, '0');
+  var minuto = DateTime.now().minute.toString().padLeft(2, '0');
+  var segundo = DateTime.now().second.toString().padLeft(2, '0');
+  dataHoraAtual = '${ano}-${mes}-${dia} ${hora}:${minuto}:${segundo}';
 }

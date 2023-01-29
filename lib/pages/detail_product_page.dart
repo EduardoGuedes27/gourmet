@@ -157,40 +157,60 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
               child: ElevatedButton(
                 child: Text('ADICIONAR'),
                 onPressed: () {
-                  carrinhoProvider.addItem(
-                    Produto(
-                      catCodigo: infoProdutoItem.catCodigo,
-                      proCodigo: infoProdutoItem.proCodigo,
-                      proDescricao: infoProdutoItem.proDescricao,
-                      tpiPraticado: infoProdutoItem.tpiPraticado,
-                      ucvCodigo: infoProdutoItem.ucvCodigo,
-                    ),
-                  );
-
-                  DataHoraAtual();
-
-                  void _addItemCarrinho() async {
-                    var baseUrl = Uri.parse('${dadosApi.apiUrl}/inserir-item');
-                    var dados = {
-                      "COMANDA_CODIGO": codigoComanda,
-                      "PRO_CODIGO": infoProdutoItem.proCodigo,
-                      "COMANDA_ITEM_QTD": numeroItem,
-                      "COMANDA_ITEM_VALOR_UNT": infoProdutoItem.tpiPraticado,
-                      "UCV_CODIGO": infoProdutoItem.ucvCodigo,
-                      "COMANDA_ITEM_DATA_INSERCAO": _dataHoraAtual,
-                    };
-
-                    var bodyJson = json.encode(dados);
-
-                    Response response = await http.post(
-                      baseUrl,
-                      body: bodyJson,
-                      headers: {"Content-type": "application/json"},
+                  if (observacaoSeleciondas.length >=
+                      infoProdutoItem.proQtdObsObrigatorias) {
+                    carrinhoProvider.addItem(
+                      Produto(
+                        catCodigo: infoProdutoItem.catCodigo,
+                        proCodigo: infoProdutoItem.proCodigo,
+                        proDescricao: infoProdutoItem.proDescricao,
+                        tpiPraticado: infoProdutoItem.tpiPraticado,
+                        ucvCodigo: infoProdutoItem.ucvCodigo,
+                      ),
                     );
-                    var retornoDados = jsonDecode(response.body);
-                  }
+                    DataHoraAtual();
 
-                  _addItemCarrinho();
+                    void _addItemCarrinho() async {
+                      var baseUrl = Uri.parse('${dadosApi.apiUrl}inserir-item');
+                      var dados = {
+                        "COMANDA_CODIGO": codigoComanda,
+                        "PRO_CODIGO": infoProdutoItem.proCodigo,
+                        "COMANDA_ITEM_QTD": numeroItem,
+                        "COMANDA_ITEM_VALOR_UNT": infoProdutoItem.tpiPraticado,
+                        "UCV_CODIGO": infoProdutoItem.ucvCodigo,
+                        "COMANDA_ITEM_DATA_INSERCAO": dataHoraAtual,
+                      };
+
+                      var bodyJson = json.encode(dados);
+
+                      Response response = await http.post(
+                        baseUrl,
+                        body: bodyJson,
+                        headers: {"Content-type": "application/json"},
+                      );
+                      var retornoDados = jsonDecode(response.body);
+
+                      comanda_item_codigo = retornoDados["COMANDA_ITEM_CODIGO"];
+                    }
+
+                    _addItemCarrinho();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.greenAccent,
+                        content: Text('ITEM INSERIDO COM SUCESSO'),
+                      ),
+                    );
+                    print('ITEM INSERIDO');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.redAccent,
+                        content: Text(
+                            'FAVOR SELECIONAR NO MINIMO ${infoProdutoItem.proQtdObsObrigatorias} OPÇÕES'),
+                      ),
+                    );
+                  }
                 },
               ),
             )
@@ -199,16 +219,4 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
       ),
     );
   }
-}
-
-var _dataHoraAtual = '';
-//ESTA FUNÇÃO PEGA A DATA ATUAL NO FORMATO 'YYYY/MM/DD HH:MM:SS'
-void DataHoraAtual() {
-  var dia = DateTime.now().day.toString().padLeft(2, '0');
-  var mes = DateTime.now().month.toString().padLeft(2, '0');
-  var ano = DateTime.now().year.toString().padLeft(4, '0');
-  var hora = DateTime.now().hour.toString().padLeft(2, '0');
-  var minuto = DateTime.now().minute.toString().padLeft(2, '0');
-  var segundo = DateTime.now().second.toString().padLeft(2, '0');
-  _dataHoraAtual = '${ano}/${mes}/${dia} ${hora}:${minuto}:${segundo}';
 }
