@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gourmet_mesa/model/carrinho.dart';
 import 'package:gourmet_mesa/model/categorias_model.dart';
 import 'package:gourmet_mesa/pages/cart_page.dart';
+import 'package:gourmet_mesa/pages/checkout_page.dart';
 import 'package:gourmet_mesa/pages/detail_product_page.dart';
 import 'package:gourmet_mesa/pages/home_page.dart';
 import 'package:gourmet_mesa/provider/categoria_provider.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.HOME_PAGE: (ctx) => const homePage(),
           AppRoutes.DETALHE_PRODUTO: (ctx) => const DetailProductPage(),
           AppRoutes.CART_PAGE: (ctx) => const CartPage(),
+          AppRoutes.CHECKOUT: (ctx) => const CheckoutPage(),
         },
       ),
     );

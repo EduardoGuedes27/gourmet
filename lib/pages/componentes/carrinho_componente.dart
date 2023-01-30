@@ -158,14 +158,6 @@ class _produtosCarrinhoComponenteState
                       ),
                       trailing: Text('${items[index].quantidadeProduto}X'),
                     ),
-                    /*Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [],
-                        ),
-                      ),
-                    ),*/
                   ],
                 ),
               ),

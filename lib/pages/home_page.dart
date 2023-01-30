@@ -116,7 +116,17 @@ class _homePageState extends State<homePage> {
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {},
-            )
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart_checkout),
+              title: Text(
+                'Pedir Conta',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutes.CHECKOUT);
+              },
+            ),
           ],
         ),
       ),
