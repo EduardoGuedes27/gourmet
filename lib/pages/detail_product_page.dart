@@ -156,7 +156,7 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
               height: 42,
               child: ElevatedButton(
                 child: Text('ADICIONAR'),
-                onPressed: () {
+                onPressed: () async {
                   if (observacaoSeleciondas.length >=
                       infoProdutoItem.proQtdObsObrigatorias) {
                     carrinhoProvider.addItem(
@@ -193,7 +193,36 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
                       comanda_item_codigo = retornoDados["COMANDA_ITEM_CODIGO"];
                     }
 
-                    _addItemCarrinho();
+                    void _addObservacao(int codigo, String descObs) async {
+                      var baseUrl =
+                          Uri.parse('${dadosApi.apiUrl}inserir-observacao');
+                      var dados = {
+                        "CODIGO_ITEM_COMANDA": codigo,
+                        "OBSERVACAO_ITEM_DESCRICAO": descObs
+                      };
+
+                      var bodyJson = json.encode(dados);
+
+                      Response response = await http.post(
+                        baseUrl,
+                        body: bodyJson,
+                        headers: {"Content-type": "application/json"},
+                      );
+                      var retornoDados = jsonDecode(response.body);
+                    }
+
+                    await _addItemCarrinho();
+
+                    if (observacaoSeleciondas.length > 0) {
+                      print(comanda_item_codigo);
+
+                      observacaoSeleciondas.forEach((observacao) {
+                        var codigo = comanda_item_codigo;
+                        _addObservacao(codigo, observacao.toString());
+                      });
+                    } else {
+                      print('Sem observações');
+                    }
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -202,6 +231,7 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
                       ),
                     );
                     print('ITEM INSERIDO');
+                    observacaoSeleciondas = [];
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -219,4 +249,21 @@ class _QuantidaItemCarrinhoState extends State<QuantidaItemCarrinho> {
       ),
     );
   }
+}
+
+void _addObservacao() async {
+  var baseUrl = Uri.parse('${dadosApi.apiUrl}inserir-observacao');
+  var dados = {
+    "CODIGO_ITEM_COMANDA": comanda_item_codigo,
+    "OBSERVACAO_ITEM_DESCRICAO": "BEM PESADO"
+  };
+
+  var bodyJson = json.encode(dados);
+
+  Response response = await http.post(
+    baseUrl,
+    body: bodyJson,
+    headers: {"Content-type": "application/json"},
+  );
+  var retornoDados = jsonDecode(response.body);
 }

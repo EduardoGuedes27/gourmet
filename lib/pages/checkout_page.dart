@@ -100,7 +100,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: ElevatedButton(
               child: Text('Pedir Conta'),
               onPressed: () {
-                // _PedirConta();
+                _PedirConta();
               },
             ),
           ),
