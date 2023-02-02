@@ -1,17 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:gourmet_mesa/app/styles/app_styles.dart';
-import 'package:gourmet_mesa/app/styles/cores_style.dart';
-import 'package:gourmet_mesa/app/styles/texto_styles.dart';
-import 'package:gourmet_mesa/model/carrinho.dart';
-import 'package:gourmet_mesa/pages/cart_page.dart';
-import 'package:gourmet_mesa/pages/checkout_page.dart';
-import 'package:gourmet_mesa/pages/detail_product_page.dart';
-import 'package:gourmet_mesa/pages/home_page.dart';
-import 'package:gourmet_mesa/provider/categoria_provider.dart';
-import 'package:gourmet_mesa/provider/produto_provider.dart';
-import 'package:gourmet_mesa/utils/rotas_pages.dart';
+import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
+import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
+import 'package:gourmet_mesa/app/model/carrinho_model.dart';
+import 'package:gourmet_mesa/app/pages/cart_page.dart';
+import 'package:gourmet_mesa/app/pages/checkout_page.dart';
+import 'package:gourmet_mesa/app/pages/detail_product_page.dart';
+import 'package:gourmet_mesa/app/pages/home_page.dart';
+import 'package:gourmet_mesa/app/provider/categoria_provider.dart';
+import 'package:gourmet_mesa/app/provider/produto_provider.dart';
+import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
 import 'package:provider/provider.dart';
 
 class GourmetVix extends StatelessWidget {
@@ -32,7 +31,7 @@ class GourmetVix extends StatelessWidget {
           create: (_) => CategoriaProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => Carrinho(),
+          create: (_) => CarrinhoModel(),
         ),
       ],
       child: MaterialApp(
