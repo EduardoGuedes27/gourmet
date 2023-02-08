@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gourmet_mesa/app/apis/produtos_api.dart';
+import 'package:gourmet_mesa/app/apis/get/produtos_api.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
 
 class ProdutoProvider extends ChangeNotifier {

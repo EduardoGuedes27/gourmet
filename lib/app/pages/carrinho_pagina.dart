@@ -7,15 +7,16 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/pages/componentes/carrinho_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/item_carrinho_componente.dart';
 
-class CartPage extends StatefulWidget {
-  const CartPage({Key key}) : super(key: key);
+class CarrinhoPagina extends StatefulWidget {
+  const CarrinhoPagina({Key key}) : super(key: key);
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  State<CarrinhoPagina> createState() => _CarrinhoPaginaState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CarrinhoPaginaState extends State<CarrinhoPagina> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

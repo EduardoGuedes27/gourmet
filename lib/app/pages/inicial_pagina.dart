@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:gourmet_mesa/app/apis/post/abertura_comanda.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
 import 'package:gourmet_mesa/app/model/categorias_model.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
-import 'package:gourmet_mesa/app/pages/componentes/badge.dart';
+import 'package:gourmet_mesa/app/pages/componentes/badge_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/categorias_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/produtos_componente.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
@@ -38,39 +39,51 @@ class _homePageState extends State<homePage> {
         final TextEditingController _numeroController = TextEditingController();
         final TextEditingController _nomeController = TextEditingController();
         final TextEditingController _localController = TextEditingController();
-
+        _numeroController.text = '5';
         return AlertDialog(
           content: Form(
             key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                    'Esta comanda esta livre! preencha os dados para prosseguir'),
-                TextFormField(
-                  controller: _numeroController,
-                  decoration: InputDecoration(hintText: "NUMERO COMANDA"),
-                  validator: (value) {
-                    return value.isNotEmpty
-                        ? null
-                        : "Favor informar o numero da Comanda";
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Esta comanda esta livre!'),
                 ),
-                TextFormField(
-                  controller: _nomeController,
-                  decoration: InputDecoration(hintText: "NOME"),
-                  validator: (value) {
-                    return value.isNotEmpty
-                        ? null
-                        : "Favor informar o seu Nome";
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    enabled: false,
+                    controller: _numeroController,
+                    decoration: InputDecoration(label: Text("NUMERO COMANDA")),
+                    validator: (value) {
+                      return value.isNotEmpty
+                          ? null
+                          : "Favor informar o numero da Comanda";
+                    },
+                  ),
                 ),
-                TextFormField(
-                  controller: _localController,
-                  decoration: InputDecoration(hintText: "LOCAL MESA"),
-                  validator: (value) {
-                    return value.isNotEmpty ? null : "Favor informar o Andar";
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _nomeController,
+                    decoration: InputDecoration(label: Text("NOME")),
+                    validator: (value) {
+                      return value.isNotEmpty
+                          ? null
+                          : "Favor informar o seu Nome";
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _localController,
+                    decoration: InputDecoration(label: Text("LOCAL MESA")),
+                    validator: (value) {
+                      return value.isNotEmpty ? null : "Favor informar o Andar";
+                    },
+                  ),
                 ),
               ],
             ),
@@ -87,7 +100,7 @@ class _homePageState extends State<homePage> {
                 inputAbrirMesa.data_abertura = dataHoraAtual.toString();
 
                 if (_formKey.currentState.validate()) {
-                  _abrirMesa();
+                  AbrirComanda();
                   Navigator.pop(context);
                 }
               },
@@ -187,30 +200,3 @@ class _homePageState extends State<homePage> {
     );
   }
 }
-
-void _abrirMesa() async {
-  DataHoraAtual();
-  var baseUrl = Uri.parse('${ParametrosApi.apiUrl}/abrir-comanda');
-  var dados = {
-    "NUMERO_COMANDA": inputAbrirMesa.numero_comanda,
-    "NOME_CLIENTE": inputAbrirMesa.nome_cliente,
-    "LOCAL_MESA": inputAbrirMesa.local_mesa,
-    "DATA_ABERTURA": inputAbrirMesa.data_abertura,
-  };
-
-  var bodyJson = json.encode(dados);
-
-  Response response = await http.post(
-    baseUrl,
-    body: bodyJson,
-    headers: {"Content-type": "application/json"},
-  );
-  var retornoDados = json.decode(response.body);
-  int retorno_codigo = retornoDados["CON_CODIGO"];
-
-  codigoComanda = retorno_codigo;
-
-  print(retorno_codigo);
-}
-
-var codigoComanda;

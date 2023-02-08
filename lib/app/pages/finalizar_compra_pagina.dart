@@ -3,26 +3,22 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:gourmet_mesa/app/apis/item_consumido_api.dart';
-import 'package:gourmet_mesa/app/core/dados_globais.dart';
+import 'package:gourmet_mesa/app/apis/get/item_consumido_api.dart';
+import 'package:gourmet_mesa/app/apis/post/finalizar_comanda.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/item_consumido_model.dart';
-import 'package:gourmet_mesa/app/pages/home_page.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
-class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({Key key}) : super(key: key);
+class FinalizarCompraPagina extends StatefulWidget {
+  const FinalizarCompraPagina({Key key}) : super(key: key);
 
   @override
-  State<CheckoutPage> createState() => _CheckoutPageState();
+  State<FinalizarCompraPagina> createState() => _FinalizarCompraPaginaState();
 }
 
-class _CheckoutPageState extends State<CheckoutPage> {
+class _FinalizarCompraPaginaState extends State<FinalizarCompraPagina> {
   var itemsConsumidos = <ItemConsumidoModel>[];
 
   _getItemConsumido() {
@@ -40,7 +36,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  _CheckoutPageState() {
+  _FinalizarCompraPaginaState() {
     _getItemConsumido();
   }
 
@@ -102,7 +98,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: ElevatedButton(
               child: Text('Pedir Conta'),
               onPressed: () {
-                _PedirConta();
+                FinalizarComanda();
               },
             ),
           ),
@@ -110,21 +106,4 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
     );
   }
-}
-
-void _PedirConta() async {
-  var baseUrl = Uri.parse('${ParametrosApi.apiUrl}/encerrar-comanda');
-  var dados = {
-    "CONTA_CODIGO": codigoComanda,
-  };
-
-  var bodyJson = json.encode(dados);
-
-  Response response = await http.patch(
-    baseUrl,
-    body: bodyJson,
-    headers: {"Content-type": "application/json"},
-  );
-  var retornoDados = json.decode(response.body);
-  print(retornoDados);
 }

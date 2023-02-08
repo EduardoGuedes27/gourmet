@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gourmet_mesa/app/apis/categorias_api.dart';
+import 'package:gourmet_mesa/app/apis/get/categorias_api.dart';
 import 'package:gourmet_mesa/app/model/categorias_model.dart';
 
 class CategoriaProvider extends ChangeNotifier {

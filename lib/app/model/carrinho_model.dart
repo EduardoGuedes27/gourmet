@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/model/carrinho_item_model.dart';
 import 'package:gourmet_mesa/app/model/observacao_produto_model.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
-import 'package:gourmet_mesa/app/pages/detail_product_page.dart';
+import 'package:gourmet_mesa/app/pages/componentes/add_carrinho.dart';
+import 'package:gourmet_mesa/app/pages/detalhe_produto_pagina.dart';
 
 class CarrinhoModel with ChangeNotifier {
   Map<String, CarrinhoItemModel> _items = {};
@@ -36,7 +38,8 @@ class CarrinhoModel with ChangeNotifier {
           id: produtoExistemte.id,
           codigoProduto: produtoExistemte.codigoProduto,
           nomeProduto: produtoExistemte.nomeProduto,
-          quantidadeProduto: produtoExistemte.quantidadeProduto + numeroItem,
+          quantidadeProduto: produtoExistemte.quantidadeProduto +
+              ParametrosRecebidosApi.quantidade_item,
           precoProduto: produtoExistemte.precoProduto,
         ),
       );
@@ -47,7 +50,7 @@ class CarrinhoModel with ChangeNotifier {
           id: Random().nextInt(100).toString(),
           codigoProduto: produto.proCodigo.toString(),
           nomeProduto: produto.proDescricao,
-          quantidadeProduto: numeroItem,
+          quantidadeProduto: ParametrosRecebidosApi.quantidade_item,
           precoProduto: produto.tpiPraticado,
         ),
       );

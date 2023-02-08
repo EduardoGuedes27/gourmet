@@ -1,14 +1,18 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps
 
-/*
-class dadosApi {
-  static String apiUrl = 'http://cellecia.inforvix.net.br:9000/';
-}*/
+import 'package:flutter/material.dart';
 
 class ParametrosApi {
   static String apiUrl = 'http://localhost:9000/';
   static int codigoCategoria = 1;
   static int codigoProduto = 1;
+  static int codigo_comanda;
+}
+
+class ParametrosRecebidosApi {
+  static int comanda_codigo;
+  static int comanda_item_codigo;
+  static int quantidade_item = 1;
 }
 
 class inputAbrirMesa {
