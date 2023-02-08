@@ -3,7 +3,7 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 
-void addItemCarrinho(
+void addItemCarrinhoPost(
   int codigo_produto,
   int quantidade,
   double preco_unitario,

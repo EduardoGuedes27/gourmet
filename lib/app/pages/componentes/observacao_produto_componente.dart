@@ -55,23 +55,25 @@ class _observaoProdutoComponenteState extends State<observaoProdutoComponente> {
             observacaoSeleciondas.removeAt(index);
           }
 
-          return CheckboxListTile(
-            title: Text(obsersavaoProduto[index].pobDescricao),
-            key: Key(obsersavaoProduto[index].pobCodigo.toString()),
-            value: obsersavaoProduto[index].check,
-            onChanged: (bool check) {
-              setState(
-                () {
-                  obsersavaoProduto[index].check =
-                      !obsersavaoProduto[index].check;
-                  if (check == true) {
-                    addObservacao();
-                  } else {
-                    removerObservacao(index);
-                  }
-                },
-              );
-            },
+          return SingleChildScrollView(
+            child: CheckboxListTile(
+              title: Text(obsersavaoProduto[index].pobDescricao),
+              key: Key(obsersavaoProduto[index].pobCodigo.toString()),
+              value: obsersavaoProduto[index].check,
+              onChanged: (bool check) {
+                setState(
+                  () {
+                    obsersavaoProduto[index].check =
+                        !obsersavaoProduto[index].check;
+                    if (check == true) {
+                      addObservacao();
+                    } else {
+                      removerObservacao(index);
+                    }
+                  },
+                );
+              },
+            ),
           );
         },
       ),

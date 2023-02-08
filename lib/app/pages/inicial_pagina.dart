@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:js_util';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -31,6 +32,19 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String id;
+
+  void initState() {
+    super.initState();
+    _getIdFromURL();
+  }
+
+  void _getIdFromURL() {
+    final uri = Uri.parse(window.defaultRouteName);
+    setState(() {
+      id = uri.queryParameters['id'];
+    });
+  }
 
   Future<void> _informarDadosMesa(BuildContext context) async {
     return await showDialog(
@@ -39,7 +53,7 @@ class _homePageState extends State<homePage> {
         final TextEditingController _numeroController = TextEditingController();
         final TextEditingController _nomeController = TextEditingController();
         final TextEditingController _localController = TextEditingController();
-        _numeroController.text = '5';
+        _numeroController.text = id.toString();
         return AlertDialog(
           content: Form(
             key: _formKey,

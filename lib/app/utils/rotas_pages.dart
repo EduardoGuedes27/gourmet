@@ -4,4 +4,5 @@ class AppRoutes {
   static const DETALHE_PRODUTO = '/detalhe-produto';
   static const CART_PAGE = '/carrinho';
   static const CHECKOUT = '/checkout';
+  static const QR_CODE = '/code';
 }

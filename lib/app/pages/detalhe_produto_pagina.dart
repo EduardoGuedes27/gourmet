@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, avoid_print
 
 import 'dart:convert';
+import 'dart:js_util';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -11,7 +12,7 @@ import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
-import 'package:gourmet_mesa/app/pages/componentes/add_carrinho.dart';
+import 'package:gourmet_mesa/app/pages/componentes/barra_adicionar_item_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/badge_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/observacao_produto_componente.dart';
 import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
@@ -85,7 +86,8 @@ class _DetalheProdutoPaginaState extends State<DetalheProdutoPagina> {
             ),
           ),
           observaoProdutoComponente(),
-          QuantidaItemCarrinho(),
+          Divider(),
+          BarraAdicionarItemComponente(),
         ],
       ),
     );

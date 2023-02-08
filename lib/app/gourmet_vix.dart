@@ -8,6 +8,7 @@ import 'package:gourmet_mesa/app/pages/carrinho_pagina.dart';
 import 'package:gourmet_mesa/app/pages/finalizar_compra_pagina.dart';
 import 'package:gourmet_mesa/app/pages/detalhe_produto_pagina.dart';
 import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
+import 'package:gourmet_mesa/app/pages/qr_code_teste.dart';
 import 'package:gourmet_mesa/app/provider/categoria_provider.dart';
 import 'package:gourmet_mesa/app/provider/produto_provider.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
@@ -70,6 +71,7 @@ class GourmetVix extends StatelessWidget {
           AppRoutes.DETALHE_PRODUTO: (ctx) => const DetalheProdutoPagina(),
           AppRoutes.CART_PAGE: (ctx) => const CarrinhoPagina(),
           AppRoutes.CHECKOUT: (ctx) => const FinalizarCompraPagina(),
+          AppRoutes.QR_CODE: (ctx) => const MyWidget(),
         },
       ),
     );

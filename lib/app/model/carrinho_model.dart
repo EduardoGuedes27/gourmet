@@ -5,7 +5,7 @@ import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/model/carrinho_item_model.dart';
 import 'package:gourmet_mesa/app/model/observacao_produto_model.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
-import 'package:gourmet_mesa/app/pages/componentes/add_carrinho.dart';
+import 'package:gourmet_mesa/app/pages/componentes/barra_adicionar_item_componente.dart';
 import 'package:gourmet_mesa/app/pages/detalhe_produto_pagina.dart';
 
 class CarrinhoModel with ChangeNotifier {
