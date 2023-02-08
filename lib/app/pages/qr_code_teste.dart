@@ -9,7 +9,7 @@ class MyWidget extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: QrImage(
-          data: "https://gourmet-vix.web.app/#/homepage?id=20",
+          data: "https://gourmet-vix.web.app/#/homepage?id=123",
           version: QrVersions.auto,
           size: 200.0,
         ),

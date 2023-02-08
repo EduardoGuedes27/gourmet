@@ -22,6 +22,7 @@ import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class homePage extends StatefulWidget {
   const homePage({Key key}) : super(key: key);
@@ -39,8 +40,11 @@ class _homePageState extends State<homePage> {
     _getIdFromURL();
   }
 
-  void _getIdFromURL() {
-    final uri = Uri.parse(window.defaultRouteName);
+  void _getIdFromURL() async {
+    final url = await canLaunch(window.defaultRouteName)
+        ? window.defaultRouteName
+        : 'https://gourmet-vix.web.app/#/homepage';
+    final uri = Uri.parse(url);
     setState(() {
       id = uri.queryParameters['id'];
     });
