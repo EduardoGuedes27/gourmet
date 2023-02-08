@@ -2,8 +2,7 @@
 
 import 'dart:convert';
 import 'dart:js_util';
-import 'dart:ui';
-
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -40,11 +39,8 @@ class _homePageState extends State<homePage> {
     _getIdFromURL();
   }
 
-  void _getIdFromURL() async {
-    final url = await canLaunch(window.defaultRouteName)
-        ? window.defaultRouteName
-        : 'https://gourmet-vix.web.app/#/homepage';
-    final uri = Uri.parse(url);
+  void _getIdFromURL() {
+    final uri = Uri.parse(window.location.href);
     setState(() {
       id = uri.queryParameters['id'];
     });
