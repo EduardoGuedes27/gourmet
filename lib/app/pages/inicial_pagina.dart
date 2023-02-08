@@ -1,27 +1,18 @@
 // ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, missing_return, prefer_const_constructors
 
-import 'dart:convert';
-import 'dart:js_util';
 import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/app/apis/post/abertura_comanda.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
-import 'package:gourmet_mesa/app/model/categorias_model.dart';
-import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
 import 'package:gourmet_mesa/app/pages/componentes/badge_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/categorias_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/produtos_componente.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
 
 class homePage extends StatefulWidget {
   const homePage({Key key}) : super(key: key);
