@@ -70,6 +70,7 @@ class _CategoriasComponenteState extends State<CategoriasComponente> {
       builder: (context, AsyncSnapshot<List<CategoriasModel>> snapshot) {
         if (snapshot.hasData) {
           final dadosCategorias = snapshot.data;
+          print(dadosCategorias);
           return ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -79,6 +80,7 @@ class _CategoriasComponenteState extends State<CategoriasComponente> {
             },
           );
         } else {
+          print('TENTANDO CONEXÃO');
           return Center(
             child: CircularProgressIndicator(),
           );

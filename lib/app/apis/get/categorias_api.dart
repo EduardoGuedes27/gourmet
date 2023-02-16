@@ -12,6 +12,7 @@ class CategoriasApi {
     if (response.statusCode == 200) {
       final decode = json.decode(response.body);
       var listaCaregoria = new List<CategoriasModel>();
+      print('DEU STATUS CODE 200');
 
       for (var categoria in decode) {
         var categoriaItem = new CategoriasModel.fromJson(categoria);
