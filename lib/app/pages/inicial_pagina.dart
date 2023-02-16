@@ -1,7 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
 // ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, missing_return, prefer_const_constructors
 
-import 'dart:html';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:gourmet_mesa/app/apis/post/abertura_comanda.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
@@ -11,8 +14,8 @@ import 'package:gourmet_mesa/app/pages/componentes/badge_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/categorias_componente.dart';
 import 'package:gourmet_mesa/app/pages/componentes/produtos_componente.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
+
+import 'dart:html';
 
 class homePage extends StatefulWidget {
   const homePage({Key key}) : super(key: key);
@@ -23,19 +26,6 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String id;
-
-  void initState() {
-    super.initState();
-    _getIdFromURL();
-  }
-
-  void _getIdFromURL() {
-    final uri = Uri.parse(window.location.href);
-    setState(() {
-      id = uri.queryParameters['id'];
-    });
-  }
 
   Future<void> _informarDadosMesa(BuildContext context) async {
     return await showDialog(
@@ -44,7 +34,7 @@ class _homePageState extends State<homePage> {
         final TextEditingController _numeroController = TextEditingController();
         final TextEditingController _nomeController = TextEditingController();
         final TextEditingController _localController = TextEditingController();
-        _numeroController.text = id.toString();
+        //_numeroController.text = 20.toString();
         return AlertDialog(
           content: Form(
             key: _formKey,
@@ -58,7 +48,7 @@ class _homePageState extends State<homePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    enabled: false,
+                    // enabled: false,
                     controller: _numeroController,
                     decoration: InputDecoration(label: Text("NUMERO COMANDA")),
                     validator: (value) {

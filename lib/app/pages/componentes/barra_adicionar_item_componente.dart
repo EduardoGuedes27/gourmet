@@ -111,7 +111,7 @@ class _BarraAdicionarItemComponenteState
                     ),
                   );
 
-                  addItemCarrinhoPost(
+                  await addItemCarrinhoPost(
                     DadosProdutoSelecionado.proCodigo,
                     ParametrosRecebidosApi.quantidade_item,
                     DadosProdutoSelecionado.tpiPraticado,
@@ -119,9 +119,10 @@ class _BarraAdicionarItemComponenteState
                   );
 
                   if (observacaoSeleciondas.length > 0) {
+                    int _codigoItemComanda =
+                        ParametrosRecebidosApi.comanda_item_codigo;
                     observacaoSeleciondas.forEach((observacao) {
-                      var codigo = ParametrosRecebidosApi.comanda_item_codigo;
-                      addObservacao(codigo, observacao.toString());
+                      addObservacao(_codigoItemComanda, observacao.toString());
                     });
                   }
 

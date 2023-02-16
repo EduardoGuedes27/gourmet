@@ -30,4 +30,6 @@ void addItemCarrinhoPost(
 
   ParametrosRecebidosApi.comanda_item_codigo =
       retornoDados["COMANDA_ITEM_CODIGO"];
+
+  print(ParametrosRecebidosApi.comanda_item_codigo);
 }
