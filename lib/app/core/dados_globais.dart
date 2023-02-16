@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class ParametrosApi {
-  static String apiUrl = 'http://inforvix.com.br:9001/';
+  static String apiUrl = 'https://inforvix.com.br:9001/';
   static int codigoCategoria = 1;
   static int codigoProduto = 1;
   static int codigo_comanda;
