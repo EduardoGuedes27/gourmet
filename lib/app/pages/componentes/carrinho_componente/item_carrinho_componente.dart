@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
-import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
+import 'package:gourmet_mesa/app/pages/home_page.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;

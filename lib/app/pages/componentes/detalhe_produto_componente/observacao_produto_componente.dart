@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:gourmet_mesa/app/apis/get/observacao_produto_api.dart';
+import 'package:gourmet_mesa/app/apis/pagina_detalhe_produto/observacao_produto_api.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
 import 'package:gourmet_mesa/app/model/observacao_produto_model.dart';
 import 'package:provider/provider.dart';

@@ -1,25 +1,14 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, avoid_print
 
-import 'dart:convert';
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
-import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
-import 'package:gourmet_mesa/app/pages/componentes/barra_adicionar_item_componente.dart';
-import 'package:gourmet_mesa/app/pages/componentes/badge_componente.dart';
-import 'package:gourmet_mesa/app/pages/componentes/observacao_produto_componente.dart';
-import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
-import 'package:gourmet_mesa/app/provider/produto_provider.dart';
+import 'package:gourmet_mesa/app/pages/componentes/detalhe_produto_componente/barra_adicionar_item_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/homepage_componente/badge_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/detalhe_produto_componente/observacao_produto_componente.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class DetalheProdutoPagina extends StatefulWidget {

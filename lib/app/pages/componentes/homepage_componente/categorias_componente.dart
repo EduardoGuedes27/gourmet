@@ -1,10 +1,6 @@
 // ignore_for_file: missing_return, prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/model/categorias_model.dart';
@@ -80,7 +76,6 @@ class _CategoriasComponenteState extends State<CategoriasComponente> {
             },
           );
         } else {
-          print('TENTANDO CONEXÃO');
           return Center(
             child: CircularProgressIndicator(),
           );

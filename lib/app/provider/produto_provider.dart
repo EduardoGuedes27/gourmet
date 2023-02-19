@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gourmet_mesa/app/apis/get/produtos_api.dart';
+import 'package:gourmet_mesa/app/apis/pagina_home/produtos_api.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
 
 class ProdutoProvider extends ChangeNotifier {
@@ -9,16 +9,16 @@ class ProdutoProvider extends ChangeNotifier {
     if (produtos != null) {
       return produtos;
     }
-    var api = new ProdutosApi();
-    this.produtos = await api.getProdrutos();
+    var api = ProdutosApi();
+    produtos = await api.getProdrutos();
     notifyListeners();
 
     return produtos;
   }
 
   Future<List<ProdutosCategoriaModel>> refreshProdutos() async {
-    var api = new ProdutosApi();
-    this.produtos = await api.getProdrutos();
+    var api = ProdutosApi();
+    produtos = await api.getProdrutos();
     notifyListeners();
 
     return produtos;

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
-import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -18,6 +17,5 @@ void ConfirmarCompraItem() async {
     body: bodyJson,
     headers: {"Content-type": "application/json"},
   );
-  var retornoDados = json.decode(response.body);
-  print(retornoDados);
+  //var retornoDados = json.decode(response.body);
 }

@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
-import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
 import 'package:http/http.dart' as http;
 
 class ItemConsumidoApi {

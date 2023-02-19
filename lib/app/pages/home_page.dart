@@ -1,24 +1,22 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
-// ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, missing_return, prefer_const_constructors
-
-import 'dart:convert';
+// ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use, ignore_for_file: non_constant_identifier_names, avoid_types_as_parameter_names, missing_return, prefer_const_constructors, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:gourmet_mesa/app/pages/componentes/styles_componentes/titulo_page_componente.dart';
 import 'package:provider/provider.dart';
-import 'package:gourmet_mesa/app/apis/post/abertura_comanda.dart';
+import 'package:gourmet_mesa/app/apis/pagina_home/abertura_comanda.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
-import 'package:gourmet_mesa/app/pages/componentes/badge_componente.dart';
-import 'package:gourmet_mesa/app/pages/componentes/categorias_componente.dart';
-import 'package:gourmet_mesa/app/pages/componentes/produtos_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/homepage_componente/badge_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/homepage_componente/categorias_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/homepage_componente/produtos_componente.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
 
-import 'dart:html';
-
 class homePage extends StatefulWidget {
-  const homePage({Key key}) : super(key: key);
+  const homePage({
+    Key key,
+  }) : super(key: key);
 
   @override
   State<homePage> createState() => _homePageState();
@@ -34,7 +32,7 @@ class _homePageState extends State<homePage> {
         final TextEditingController _numeroController = TextEditingController();
         final TextEditingController _nomeController = TextEditingController();
         final TextEditingController _localController = TextEditingController();
-        //_numeroController.text = 20.toString();
+
         return AlertDialog(
           content: Form(
             key: _formKey,
@@ -87,7 +85,6 @@ class _homePageState extends State<homePage> {
             TextButton(
               onPressed: () {
                 DataHoraAtual();
-
                 inputAbrirMesa.numero_comanda =
                     _numeroController.text.toString();
                 inputAbrirMesa.nome_cliente = _nomeController.text.toString();
@@ -116,16 +113,28 @@ class _homePageState extends State<homePage> {
         child: Column(
           children: [
             AppBar(
-              title: Text('Seja Bem Vindo'),
+              title: Text('Seja Bem Vindo!'),
             ),
             Divider(),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text(
+                'Cardapio',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutes.HOME_PAGE);
+              },
+            ),
             ListTile(
               leading: Icon(Icons.shopping_cart),
               title: Text(
                 'Carrinho',
                 style: TextStyle(fontSize: 20),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART_PAGE);
+              },
             ),
             ListTile(
               leading: Icon(Icons.shopping_cart_checkout),
@@ -178,16 +187,7 @@ class _homePageState extends State<homePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-            child: SelectableText(
-              'Cardapio',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
+          TituloPaginaComponente(titulo_pagina: 'Cardapio'),
           CategoriasComponente(),
           ProdutosComponente(),
         ],

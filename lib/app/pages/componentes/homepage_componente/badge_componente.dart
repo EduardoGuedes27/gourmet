@@ -1,12 +1,6 @@
 // COMPONENTE PARA MOSTRA QUE A PRODUTOS NO CARRINHO
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
-
-import 'package:flutter/animation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
 import 'package:provider/provider.dart';
 

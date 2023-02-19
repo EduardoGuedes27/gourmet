@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gourmet_mesa/app/apis/get/categorias_api.dart';
+import 'package:gourmet_mesa/app/apis/pagina_home/categorias_api.dart';
 import 'package:gourmet_mesa/app/model/categorias_model.dart';
 
 class CategoriaProvider extends ChangeNotifier {
@@ -9,16 +9,16 @@ class CategoriaProvider extends ChangeNotifier {
     if (categorias != null) {
       return categorias;
     }
-    var api = new CategoriasApi();
-    this.categorias = await api.getCategorias();
+    var api = CategoriasApi();
+    categorias = await api.getCategorias();
     notifyListeners();
 
     return categorias;
   }
 
   Future<List<CategoriasModel>> refreshCategorias() async {
-    var api = new CategoriasApi();
-    this.categorias = await api.getCategorias();
+    var api = CategoriasApi();
+    categorias = await api.getCategorias();
     notifyListeners();
 
     return categorias;

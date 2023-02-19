@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, avoid_print, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:gourmet_mesa/app/apis/post/adicionar_item_carrinho.dart';
-import 'package:gourmet_mesa/app/apis/post/adicionar_observacao_item.dart';
+import 'package:gourmet_mesa/app/apis/pagina_detalhe_produto/adicionar_item_carrinho.dart';
+import 'package:gourmet_mesa/app/apis/pagina_detalhe_produto/adicionar_observacao_item.dart';
 import 'package:gourmet_mesa/app/core/dados_globais.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
 import 'package:gourmet_mesa/app/model/produtos_categoria_model.dart';
-import 'package:gourmet_mesa/app/pages/componentes/observacao_produto_componente.dart';
+import 'package:gourmet_mesa/app/pages/componentes/detalhe_produto_componente/observacao_produto_componente.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -32,7 +32,6 @@ class _BarraAdicionarItemComponenteState
         Container(
           height: 68,
           padding: EdgeInsets.all(8),
-          //width: context.percentWidth(0.5),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),

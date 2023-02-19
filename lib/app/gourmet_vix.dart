@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:gourmet_mesa/app/core/styles/app_styles.dart';
 import 'package:gourmet_mesa/app/core/styles/cores_style.dart';
 import 'package:gourmet_mesa/app/model/carrinho_model.dart';
-import 'package:gourmet_mesa/app/pages/carrinho_pagina.dart';
-import 'package:gourmet_mesa/app/pages/finalizar_compra_pagina.dart';
-import 'package:gourmet_mesa/app/pages/detalhe_produto_pagina.dart';
-import 'package:gourmet_mesa/app/pages/inicial_pagina.dart';
-import 'package:gourmet_mesa/app/pages/qr_code_teste.dart';
+import 'package:gourmet_mesa/app/pages/carrinho.dart';
+import 'package:gourmet_mesa/app/pages/finalizar_consumo.dart';
+import 'package:gourmet_mesa/app/pages/detalhe_produto.dart';
+import 'package:gourmet_mesa/app/pages/home_page.dart';
 import 'package:gourmet_mesa/app/provider/categoria_provider.dart';
 import 'package:gourmet_mesa/app/provider/produto_provider.dart';
 import 'package:gourmet_mesa/app/utils/rotas_pages.dart';
@@ -65,13 +64,12 @@ class GourmetVix extends StatelessWidget {
             focusedBorder: _defaultBorder,
           ),
         ),
-        initialRoute: '/homepage',
+        initialRoute: AppRoutes.HOME_PAGE,
         routes: {
           AppRoutes.HOME_PAGE: (ctx) => const homePage(),
           AppRoutes.DETALHE_PRODUTO: (ctx) => const DetalheProdutoPagina(),
           AppRoutes.CART_PAGE: (ctx) => const CarrinhoPagina(),
           AppRoutes.CHECKOUT: (ctx) => const FinalizarCompraPagina(),
-          AppRoutes.QR_CODE: (ctx) => const MyWidget(),
         },
       ),
     );
